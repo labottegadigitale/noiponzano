@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noi Ponzano – Centro Sportivo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --white: #FFFFFF;
+    --off-white: #F5F5F3;
+    --black: #1A1A1A;
+    --mid: #2D2D2D;
+    --muted: #767676;
+    --accent: #FF5C1A;
+    --accent-dark: #D94800;
+    --border: #E2E2DF;
+    --card-bg: #FAFAF8;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Barlow', sans-serif;
+    background: var(--white);
+    color: var(--mid);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5vw;
+    height: 64px;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 1.35rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--black);
+    text-decoration: none;
+  }
+
+  .nav-logo span { color: var(--accent); }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mid);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  .nav-cta {
+    background: var(--accent);
+    color: var(--white) !important;
+    padding: 0.5rem 1.25rem;
+    border-radius: 2px;
+    transition: background 0.2s !important;
+  }
+
+  .nav-cta:hover { background: var(--accent-dark) !important; color: var(--white) !important; }
+
+  .language-switcher {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 200;
+    display: inline-flex;
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 999px;
+    background: rgba(255,255,255,0.96);
+    box-shadow: 0 14px 32px rgba(0,0,0,0.08);
+    overflow: hidden;
+  }
+
+  .language-switcher .lang-btn {
+    padding: 0.65rem 0.9rem;
+    border: none;
+    background: transparent;
+    color: var(--mid);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .language-switcher .lang-btn.active,
+  .language-switcher .lang-btn:hover {
+    background: var(--accent);
+    color: var(--white);
+  }
+
+  /* ─── HERO ─── */
+  #hero {
+    position: relative;
+    min-height: 100svh;
+    background: var(--black);
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    padding: 100px 5vw 60px;
+  }
+
+  /* Field-line signature element */
+  #hero::before {
+    content: '';
+    position: absolute;
+    top: -10%;
+    right: 18%;
+    width: 3px;
+    height: 140%;
+    background: rgba(255,255,255,0.06);
+    transform: rotate(15deg);
+    transform-origin: center center;
+  }
+
+  #hero::after {
+    content: '';
+    position: absolute;
+    top: -10%;
+    right: 22%;
+    width: 1px;
+    height: 140%;
+    background: rgba(255,92,26,0.35);
+    transform: rotate(15deg);
+    transform-origin: center center;
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 860px;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 32px;
+    height: 2px;
+    background: var(--accent);
+  }
+
+  .hero-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    line-height: 0.92;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 1.75rem;
+  }
+
+  .hero-title em {
+    font-style: normal;
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+    font-weight: 300;
+    color: rgba(255,255,255,0.65);
+    max-width: 540px;
+    line-height: 1.7;
+    margin-bottom: 2.75rem;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--accent);
+    color: var(--white);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 0.9rem 2rem;
+    border-radius: 2px;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .btn-primary:hover {
+    background: var(--accent-dark);
+    transform: translateY(-1px);
+  }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: transparent;
+    color: rgba(255,255,255,0.7);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 0.9rem 1.5rem;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+
+  .btn-ghost:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .hero-stats {
+    position: absolute;
+    bottom: 48px;
+    right: 5vw;
+    display: flex;
+    gap: 2.5rem;
+  }
+
+  .stat {
+    text-align: right;
+  }
+
+  .stat-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 2.2rem;
+    color: var(--white);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    margin-top: 0.25rem;
+  }
+
+  /* ─── SECTION SHARED ─── */
+  section { padding: 96px 5vw; }
+
+  .section-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .section-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 2px;
+    background: var(--accent);
+  }
+
+  .section-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    line-height: 1;
+    text-transform: uppercase;
+    color: var(--black);
+    margin-bottom: 3.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  /* ─── CAMPI & SERVIZI ─── */
+  #campi { background: var(--off-white); }
+
+  .campi-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px;
+    margin-bottom: 1.5px;
+  }
+
+  .campo-card {
+    background: var(--white);
+    padding: 2.5rem 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s;
+  }
+
+  .campo-card:hover { transform: translateY(-3px); }
+
+  .campo-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--accent);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.25s ease;
+  }
+
+  .campo-card:hover::before { transform: scaleY(1); }
+
+  .campo-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1.25rem;
+    display: block;
+  }
+
+  .campo-sport {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--black);
+    margin-bottom: 0.5rem;
+  }
+
+  .campo-desc {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .servizi-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5px;
+  }
+
+  .servizio-card {
+    background: var(--black);
+    padding: 2rem 2rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .servizio-icon {
+    font-size: 1.75rem;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+
+  .servizio-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--white);
+    margin-bottom: 0.35rem;
+  }
+
+  .servizio-desc {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.5;
+  }
+
+  /* ─── ORARI & ACCESSO ─── */
+  #info { background: var(--white); }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .orari-block {}
+
+  .orari-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+  }
+
+  .orari-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .orari-table tr {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .orari-table td {
+    padding: 0.9rem 0;
+    font-size: 0.95rem;
+  }
+
+  .orari-table td:first-child {
+    font-weight: 500;
+    color: var(--mid);
+  }
+
+  .orari-table td:last-child {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-align: right;
+    color: var(--black);
+    letter-spacing: 0.02em;
+  }
+
+  .orari-note {
+    margin-top: 1.5rem;
+    padding: 1rem 1.25rem;
+    background: var(--off-white);
+    border-left: 3px solid var(--accent);
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .access-block {}
+
+  .access-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .access-item:first-of-type { padding-top: 0; }
+
+  .access-icon-wrap {
+    width: 48px;
+    height: 48px;
+    background: var(--off-white);
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+  }
+
+  .access-text-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--black);
+    margin-bottom: 0.25rem;
+  }
+
+  .access-text-desc {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* ─── EVENTI ─── */
+  #eventi { background: var(--black); }
+
+  #eventi .section-eyebrow { color: var(--accent); }
+  #eventi .section-title { color: var(--white); }
+
+  .anguria-feature {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 2px;
+    margin-bottom: 4rem;
+    background: rgba(255,255,255,0.04);
+  }
+
+  .anguria-content {
+    padding: 3rem;
+  }
+
+  .anguria-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: rgba(255,92,26,0.12);
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    margin-bottom: 1.25rem;
+  }
+
+  .anguria-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 1.25rem;
+    line-height: 1;
+  }
+
+  .anguria-desc {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.65);
+    font-weight: 300;
+    margin-bottom: 1rem;
+    max-width: 540px;
+  }
+
+  .anguria-perks {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.85rem;
+    margin-top: 1.75rem;
+  }
+
+  .anguria-perks .anguria-perk {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.7);
+  }
+
+  .perk-icon { font-size: 1rem; }
+
+  .anguria-visual {
+    background: linear-gradient(135deg, rgba(255,92,26,0.18), rgba(255,92,26,0.04));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 220px;
+  }
+
+  .anguria-emoji {
+    font-size: 7rem;
+    filter: drop-shadow(0 12px 28px rgba(255,92,26,0.3));
+  }
+
+  .gallery-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 1.25rem;
+  }
+
+  .event-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    justify-items: center;
+  }
+
+  .gallery-item {
+    width: 100%;
+    max-width: 500px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+  }
+
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 4px;
+  }
+
+  .gallery-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .gallery-note {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.35);
+    text-align: center;
+    font-style: italic;
+  }
+
+  .facebook-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: transparent;
+    transition: transform 0.2s;
+    overflow: hidden;
+  }
+
+  .facebook-link img {
+    width: 44px;
+    height: auto;
+    display: block;
+  }
+
+  .facebook-link:hover {
+    transform: translateY(-1px);
+  }
+
+  /* ─── FOOTER ─── */
+  #footer { background: var(--white); padding: 0; }
+
+  .map-container {
+    width: 100%;
+    height: 340px;
+    background: var(--off-white);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .map-container iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+  }
+
+  .map-overlay {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 5vw;
+    background: var(--white);
+    padding: 1.25rem 1.5rem;
+    border-radius: 2px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+    max-width: 320px;
+  }
+
+  .map-address {
+    font-size: 0.85rem;
+    color: var(--mid);
+    line-height: 1.5;
+    margin-bottom: 0.75rem;
+  }
+
+  .map-address strong {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--black);
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+
+  .btn-maps {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--accent);
+    color: var(--white);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 0.6rem 1rem;
+    border-radius: 2px;
+    transition: background 0.2s;
+  }
+
+  .btn-maps:hover { background: var(--accent-dark); }
+
+  .footer-bar {
+    padding: 2rem 5vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--border);
+  }
+
+  .footer-logo {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 1.15rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--black);
+  }
+
+  .footer-logo span { color: var(--accent); }
+
+  .footer-copy {
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+  }
+
+  .footer-links a {
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--accent); }
+
+  /* ─── PRENOTA & FESTA & CONTATTI ─── */
+  #festa { background: var(--off-white); }
+
+  .prenota-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .form-box {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 2.5rem;
+  }
+
+  .form-box-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--black);
+    margin-bottom: 0.35rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .form-box-sub {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 1.75rem;
+    line-height: 1.5;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-bottom: 1rem;
+  }
+
+  .form-group:last-of-type { margin-bottom: 0; }
+
+  .form-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .form-input, .form-select, .form-textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1.5px solid var(--border);
+    border-radius: 2px;
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.95rem;
+    color: var(--mid);
+    background: var(--white);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+    -webkit-appearance: none;
+  }
+
+  .form-input:focus, .form-select:focus, .form-textarea:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(255,92,26,0.1);
+  }
+
+  .form-select {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23767676' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem;
+  }
+
+  .form-textarea {
+    min-height: 90px;
+    resize: vertical;
+  }
+
+  .btn-submit {
+    width: 100%;
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: var(--accent);
+    color: var(--white);
+    border: none;
+    border-radius: 2px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .btn-submit:hover {
+    background: var(--accent-dark);
+    transform: translateY(-1px);
+  }
+
+  /* Festa box */
+  .festa-single-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .festa-box-full {
+    padding: 3rem;
+  }
+
+  .festa-box {
+    background: var(--black);
+    border-radius: 2px;
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .festa-box::before {
+    content: '🎉';
+    position: absolute;
+    top: -0.5rem;
+    right: 1.5rem;
+    font-size: 5rem;
+    opacity: 0.08;
+    transform: rotate(15deg);
+    pointer-events: none;
+  }
+
+  .festa-box .form-box-title { color: var(--white); }
+  .festa-box .form-box-sub { color: rgba(255,255,255,0.5); }
+  .festa-box .form-label { color: rgba(255,255,255,0.45); }
+
+  .festa-box .form-input,
+  .festa-box .form-select,
+  .festa-box .form-textarea {
+    background: rgba(255,255,255,0.05);
+    border-color: rgba(255,255,255,0.12);
+    color: var(--white);
+  }
+
+  .festa-box .form-input::placeholder,
+  .festa-box .form-textarea::placeholder { color: rgba(255,255,255,0.3); }
+
+  .festa-box .form-input:focus,
+  .festa-box .form-select:focus,
+  .festa-box .form-textarea:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(255,92,26,0.2);
+  }
+
+  .festa-box .form-select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23999' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  }
+
+  .festa-box .form-select option { background: #2a2a2a; color: var(--white); }
+
+  .festa-perks {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .festa-perks .festa-perk {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.6);
+  }
+
+  .festa-perk-icon { font-size: 1rem; }
+
+  /* Contatti box */
+  #contatti { background: var(--white); }
+
+  .contatti-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .contatti-desc {
+    font-size: 1rem;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+  }
+
+  .contatti-email-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 0.04em;
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 0.2rem;
+    transition: opacity 0.2s;
+  }
+
+  .contatti-email-link:hover { opacity: 0.75; }
+
+  .contatti-form-box {
+    background: var(--off-white);
+    border-radius: 2px;
+    padding: 2.5rem;
+  }
+
+  .form-success {
+    display: none;
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .form-success-icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
+
+  .form-success-text {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    color: var(--black);
+    margin-bottom: 0.5rem;
+  }
+
+  .form-success-sub {
+    font-size: 0.88rem;
+    color: var(--muted);
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .campi-grid { grid-template-columns: 1fr; }
+    .servizi-row { grid-template-columns: 1fr; }
+    .info-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .anguria-feature { grid-template-columns: 1fr; }
+    .anguria-visual { min-height: 140px; }
+    .event-gallery { grid-template-columns: 1fr; }
+    .hero-stats { position: static; margin-top: 3rem; flex-wrap: wrap; gap: 1.5rem; }
+    .hero-stats .stat { text-align: left; }
+    .footer-bar { flex-direction: column; gap: 1rem; text-align: center; }
+    .footer-links { justify-content: center; }
+    .nav-links { display: none; }
+  }
+
+  @media (max-width: 600px) {
+    section { padding: 64px 5vw; }
+    .map-overlay { left: 1rem; right: 1rem; max-width: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .campo-card, .btn-primary { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#hero">Noi <span>Ponzano</span></a>
+  <ul class="nav-links">
+    <li><a href="#campi" data-i18n-key="navFields">Spazi</a></li>
+    <li><a href="#eventi" data-i18n-key="navEvents">Eventi</a></li>
+    <li><a href="#info" data-i18n-key="navHours">Orari</a></li>
+    <li><a href="#festa" class="nav-cta" data-i18n-key="navBook">Organizza Festa</a></li>
+  </ul>
+</nav>
+<div class="language-switcher" aria-label="Language switcher">
+  <button class="lang-btn active" data-lang="it">IT</button>
+  <button class="lang-btn" data-lang="en">EN</button>
+</div>
+
+<section id="hero">
+  <div class="hero-inner">
+    <p class="hero-eyebrow" data-i18n-key="heroLocation">Ponzano Veneto, TV</p>
+    <h1 class="hero-title" data-i18n-key="heroTitle">
+      Noi Ponzano<br>
+      Un oratorio <em>per tutti,</em><br>
+      tutto l'anno.
+    </h1>
+    <p class="hero-sub" data-i18n-key="heroSubtitle">
+      Campi da calcio, beach volley e basket per le attività dell'oratorio.
+      Uno spazio aperto alla comunità, dove organizzare feste ed eventi insieme.
+    </p>
+    <div class="hero-actions">
+      <a href="#festa" class="btn-primary" data-i18n-key="heroBook">Organizza una festa</a>
+      <a href="#campi" class="btn-ghost" data-i18n-key="heroDiscover">Scopri lo spazio →</a>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">3</div>
+      <div class="stat-label" data-i18n-key="statSports">Spazi sportivi</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">10+</div>
+      <div class="stat-label" data-i18n-key="statStars">Anni di Festa dell'Anguria</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">100%</div>
+      <div class="stat-label" data-i18n-key="statAccessible">Accessibile</div>
+    </div>
+  </div>
+</section>
+
+<section id="campi">
+  <p class="section-eyebrow" data-i18n-key="sectionFacilities">I nostri spazi</p>
+  <h2 class="section-title" data-i18n-key="sectionTitleFields">Gli Spazi dell'Oratorio</h2>
+
+  <div class="campi-grid">
+    <div class="campo-card">
+      <span class="campo-icon">⚽</span>
+      <div class="campo-sport" data-i18n-key="campoCalcio">Calcio</div>
+      <p class="campo-desc" data-i18n-key="campoCalcioDesc">Campo in cemento, perfetto per le partite tra ragazzi e i tornei dell'oratorio. Illuminato per le sessioni serali.</p>
+    </div>
+    <div class="campo-card">
+      <span class="campo-icon">🏐</span>
+      <div class="campo-sport" data-i18n-key="campoVolley">Beach Volley</div>
+      <p class="campo-desc" data-i18n-key="campoVolleyDesc">Sabbia e reti per partite spontanee con gli amici, durante l'oratorio estivo e nei pomeriggi liberi.</p>
+    </div>
+    <div class="campo-card">
+      <span class="campo-icon">🏀</span>
+      <div class="campo-sport" data-i18n-key="campoBasket">Basket</div>
+      <p class="campo-desc" data-i18n-key="campoBasketDesc">Campo con canestri regolabili, pensato per i più piccoli quanto per i più grandi. Ideale per 3vs3 e giochi di gruppo.</p>
+    </div>
+  </div>
+
+  <div class="servizi-row">
+    <div class="servizio-card">
+      <div class="servizio-icon">🎽</div>
+      <div>
+        <div class="servizio-title" data-i18n-key="servizioAttrezzatura">Materiale Disponibile</div>
+        <p class="servizio-desc" data-i18n-key="servizioAttrezzaturaDesc">Palloni, reti e quanto serve per giocare sono già qui. Vieni e basta.</p>
+      </div>
+    </div>
+    <div class="servizio-card">
+      <div class="servizio-icon">🧠</div>
+      <div>
+        <div class="servizio-title" data-i18n-key="servizioStaff">Animatori e Volontari</div>
+        <p class="servizio-desc" data-i18n-key="servizioStaffDesc">L'oratorio è sempre seguito da animatori e volontari pronti ad accogliere bambini, ragazzi e famiglie.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="info">
+  <p class="section-eyebrow" data-i18n-key="sectionWhen">Quando veniamo</p>
+  <h2 class="section-title" data-i18n-key="sectionTitleInfo">Orari & Accesso</h2>
+
+  <div class="info-grid">
+    <div class="orari-block">
+      <div class="orari-label" data-i18n-key="orariLabel">Orari di apertura</div>
+      <table class="orari-table">
+        <tr>
+          <td data-i18n-key="lunVen">Lunedì – Venerdì</td>
+          <td>16:00 – 19:30</td>
+        </tr>
+        <tr>
+          <td data-i18n-key="sab">Sabato</td>
+          <td>16:00 – 19:30</td>
+        </tr>
+        <tr>
+          <td data-i18n-key="dom">Domenica</td>
+          <td>16:00 – 19:30</td>
+        </tr>
+      </table>
+      <div class="orari-note">
+        <strong data-i18n-key="noteStrong">Apertura flessibile.</strong> <span data-i18n-key="note">Per gruppi, catechismo, squadre o eventi speciali l'oratorio può restare aperto anche fuori dal normale orario. Basta mettersi d'accordo con noi in anticipo.</span>
+      </div>
+    </div>
+
+    <div class="access-block">
+      <div class="orari-label" data-i18n-key="accessLabel">Accessibilità</div>
+      <div class="access-item">
+        <div class="access-icon-wrap">♿</div>
+        <div>
+          <div class="access-text-title" data-i18n-key="accessTitle1">Ingresso accessibile</div>
+          <p class="access-text-desc" data-i18n-key="accessDesc1">Tutte le entrate e i percorsi interni sono completamente accessibili in sedia a rotelle. Nessuna barriera architettonica.</p>
+        </div>
+      </div>
+      <div class="access-item">
+        <div class="access-icon-wrap">🅿️</div>
+        <div>
+          <div class="access-text-title" data-i18n-key="accessTitle2">Parcheggio dedicato</div>
+          <p class="access-text-desc" data-i18n-key="accessDesc2">Stalli riservati direttamente adiacenti all'ingresso. Parcheggio 100% accessibile e gratuito per tutti i visitatori.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<section id="eventi">
+  <p class="section-eyebrow" data-i18n-key="sectionEyebrowEvents">La vita dell'oratorio</p>
+  <h2 class="section-title" data-i18n-key="sectionTitleEvents">I Nostri Eventi</h2>
+
+  <div class="anguria-feature">
+    <div class="anguria-content">
+      <span class="anguria-badge">🍉 <span data-i18n-key="angBadge">Evento dell'anno</span></span>
+      <h3 class="anguria-title" data-i18n-key="angTitle">Festa dell'Anguria</h3>
+      <p class="anguria-desc" data-i18n-key="angDesc">Da oltre dieci anni, ogni estate l'oratorio di Ponzano si riempie per la storica Festa dell'Anguria. Un appuntamento aperto a tutto il paese: musica, giochi, stand gastronomici e tantissima anguria fresca, offerta da tutta la comunità.</p>
+      <p class="anguria-desc" data-i18n-key="angDesc2">L'evento è reso possibile dai tantissimi ragazzi e volontari che ogni anno scelgono di mettersi in gioco como camerieri, animatori e organizzatori: un'iniziativa aperta a tutti, dove chiunque può dare una mano facendo il cameriere — un'occasione di festa, ma anche di crescita e di comunità.</p>
+      <p class="anguria-desc" data-i18n-key="angDesc3">Tra gli stand gastronomici non manca una specialità della casa a base di pollo, oltre naturalmente a fiumi di anguria fresca. E per i più piccoli, sul campo da calcio, oltre ai tavoli per mangiare insieme trovano spazio anche dei gonfiabili per giocare in tutta sicurezza.</p>
+      <div class="anguria-perks">
+        <div class="anguria-perk"><span class="perk-icon">🎶</span> <span data-i18n-key="angPerk1">Musica dal vivo</span></div>
+        <div class="anguria-perk"><span class="perk-icon">🍗</span> <span data-i18n-key="angPerk2">Stand gastronomici con specialità a base di pollo</span></div>
+        <div class="anguria-perk"><span class="perk-icon">🙋</span> <span data-i18n-key="angPerk3">Aperto a tutto il paese</span></div>
+        <div class="anguria-perk"><span class="perk-icon">🤝</span> <span data-i18n-key="angPerk4">Volontari benvenuti: tutti possono fare i camerieri</span></div>
+        <div class="anguria-perk"><span class="perk-icon">🏰</span> <span data-i18n-key="angPerk5">Gonfiabili per bambini sul campo da calcio</span></div>
+      </div>
+    </div>
+    <div class="anguria-visual">
+      <span class="anguria-emoji">🍉</span>
+    </div>
+  </div>
+
+  <div class="gallery-label" data-i18n-key="galleryLabel">Dai nostri post su Facebook</div>
+  <div class="event-gallery">
+    <div class="gallery-item">
+      <img src="732125974_1015694497885086_1423367742944938240_n.jpg" alt="Immagine del post Facebook di Noi Ponzano 1" loading="lazy">
+    </div>
+    <div class="gallery-item">
+      <img src="733747216_1016537297800806_7737349461710549702_n.jpg" alt="Immagine del post Facebook di Noi Ponzano 2" loading="lazy">
+    </div>
+    <div class="gallery-item">
+      <img src="734101366_1015662297888306_353454983829981402_n.jpg" alt="Immagine del post Facebook di Noi Ponzano 3" loading="lazy">
+    </div>
+  </div>
+  <div class="gallery-footer">
+    <p class="gallery-note" data-i18n-key="galleryNote">📌 Seguici sulla nostra pagina Facebook per non perderti i prossimi eventi!</p>
+    <a class="facebook-link" href="https://www.facebook.com/noiponzanoveneto/" target="_blank" rel="noopener noreferrer" aria-label="Visita la pagina Facebook di Noi Ponzano">
+      <img src="Facebook_logo_(square).png" alt="Logo Facebook" height="auto">
+    </a>
+  </div>
+</section>
+
+
+<section id="festa">
+  <p class="section-eyebrow" data-i18n-key="sectionBook">Organizza con noi</p>
+  <h2 class="section-title" data-i18n-key="sectionTitleBook">Organizza una Festa in Oratorio</h2>
+
+  <div class="festa-single-wrap">
+    <div class="festa-box festa-box-full">
+      <h3 class="form-box-title" data-i18n-key="partyTitle">Raccontaci la tua festa</h3>
+      <p class="form-box-sub" data-i18n-key="partySub">Compleanni, feste di gruppo, ricorrenze: scrivici i dettagli e ti aiutiamo a organizzare tutto nello spazio dell'oratorio.</p>
+
+      <div class="festa-perks">
+        <div class="festa-perk"><span class="festa-perk-icon">🏟️</span> <span data-i18n-key="perk1">Spazi all'aperto e al coperto</span></div>
+        <div class="festa-perk"><span class="festa-perk-icon">🎉</span> <span data-i18n-key="perk2">Compleanni e feste per bambini</span></div>
+        <div class="festa-perk"><span class="festa-perk-icon">🧑‍🤝‍🧑</span> <span data-i18n-key="perk3">Gruppi, classi e parrocchie</span></div>
+        <div class="festa-perk"><span class="festa-perk-icon">💬</span> <span data-i18n-key="perk4">Risposta personalizzata</span></div>
+      </div>
+
+      <form action="mailto:info@noiponzano.it" method="post" enctype="text/plain">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="festa-organizzatore" data-i18n-key="labelOrganizer">Nome dell'organizzatore</label>
+            <input class="form-input" id="festa-organizzatore" name="organizzatore" type="text" placeholder="Nome e cognome" data-i18n-placeholder="placeholderOrganizer" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="festa-email" data-i18n-key="labelEmail">Email</label>
+            <input class="form-input" id="festa-email" name="email" type="email" placeholder="tuo@email.com" data-i18n-placeholder="placeholderEmail" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="festa-tipo-evento" data-i18n-key="labelEventType">Tipo di evento</label>
+            <input class="form-input" id="festa-tipo-evento" name="tipo-evento" type="text" placeholder="Es. compleanno, festa per bambini, ricorrenza..." data-i18n-placeholder="placeholderEventType">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="festa-persone" data-i18n-key="labelPeople">Numero di partecipanti</label>
+            <input class="form-input" id="festa-persone" name="festa-persone" type="text" placeholder="Es. 20 persone" data-i18n-placeholder="placeholderPeople">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="festa-data" data-i18n-key="labelDate">Data preferita</label>
+          <input class="form-input" id="festa-data" name="data" type="text" placeholder="Es. Sabato pomeriggio, metà giugno..." data-i18n-placeholder="placeholderDate">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="festa-messaggio" data-i18n-key="labelPartyDetails">Dettagli della festa</label>
+          <textarea class="form-textarea" id="festa-messaggio" name="festa-messaggio" placeholder="Raccontaci cosa hai in mente: spazi, orari, eventuali esigenze particolari..." data-i18n-placeholder="placeholderPartyDetails"></textarea>
+        </div>
+
+        <button class="btn-submit" type="submit" data-i18n-key="submitRequest">Invia richiesta</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer id="footer">
+  <div class="map-container">
+    <iframe
+      src="https://www.google.com/maps?q=45.7093811,12.2236566&hl=it&z=16&output=embed"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      title="Mappa Noi Ponzano">
+    </iframe>
+    <div class="map-overlay">
+      <div class="map-address" data-i18n-key="mapAddress">
+        <strong>Noi Ponzano</strong>
+        Via Livello, 5<br>
+        31050 Ponzano Veneto TV, Italia<br><br>
+        Centro Sportivo Polivalente<br>
+        P.IVA 00000000000
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <div class="footer-logo">Noi <span>Ponzano</span></div>
+    <p class="footer-copy" data-i18n-key="footerCopy">© 2026 Noi Ponzano · Ponzano, Centro Sportivo Polivalente · P.IVA 00000000000</p>
+    <ul class="footer-links">
+      <li><a href="mailto:info@noiponzano.it" data-i18n-key="footerContact">Contatti</a></li>
+      <li><a href="#" data-i18n-key="footerPrivacy">Privacy</a></li>
+      <li><a href="#" data-i18n-key="footerLegal">Note Legali</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+  const translations = {
+    en: {
+      navFields: "Spaces",
+      navEvents: "Events",
+      navHours: "Hours",
+      navBook: "Organize a Party",
+      heroLocation: "Ponzano Veneto, TV",
+      heroTitle: "Noi Ponzano<br>An oratory <em>for everyone,</em><br>all year round.",
+      heroSubtitle: "Soccer, beach volleyball and basketball courts for oratory activities. A space open to the community, where you can organize parties and events together.",
+      heroBook: "Organize a party",
+      heroDiscover: "Discover the space →",
+      statSports: "Sport spaces",
+      statStars: "Years of Watermelon Festival",
+      statAccessible: "Accessible",
+      sectionFacilities: "Our spaces",
+      sectionTitleFields: "The Oratory Spaces",
+      campoCalcio: "Soccer",
+      campoCalcioDesc: "Cement field, perfect for matches between kids and oratory tournaments. Lit for evening sessions.",
+      campoVolley: "Beach Volleyball",
+      campoVolleyDesc: "Sand and nets for spontaneous matches with friends, during summer oratory and free afternoons.",
+      campoBasket: "Basketball",
+      campoBasketDesc: "Court with adjustable hoops, designed for both younger and older kids. Ideal for 3v3 and group games.",
+      servizioAttrezzatura: "Equipment Available",
+      servizioAttrezzaturaDesc: "Balls, nets and everything needed to play are already here. Just come.",
+      servizioStaff: "Animators and Volunteers",
+      servizioStaffDesc: "The oratory is always supervised by animators and volunteers ready to welcome children, teenagers and families.",
+      sectionWhen: "When we are open",
+      sectionTitleInfo: "Hours & Access",
+      orariLabel: "Opening hours",
+      lunVen: "Monday – Friday",
+      sab: "Saturday",
+      dom: "Sunday",
+      noteStrong: "Flexible opening.",
+      note: "For groups, catechism, teams or special events the oratory can stay open outside normal hours. Just arrange it with us in advance.",
+      accessLabel: "Accessibility",
+      accessTitle1: "Accessible entrance",
+      accessDesc1: "All entrances and indoor paths are fully wheelchair accessible. No architectural barriers.",
+      accessTitle2: "Dedicated parking",
+      accessDesc2: "Reserved bays located directly next to the entrance. 100% accessible and free parking for all visitors.",
+      sectionEyebrowEvents: "Life at the oratory",
+      sectionTitleEvents: "Our Events",
+      angBadge: "Event of the year",
+      angTitle: "Watermelon Festival",
+      angDesc: "For over ten years, every summer the Ponzano oratory fills up for the historic Watermelon Festival. An event open to the whole town: music, games, food stands and plenty of fresh watermelon, offered by the whole community.",
+      angDesc2: "The event is made possible by the many young people and volunteers who every year choose to get involved as waiters, animators and organizers: an initiative open to everyone, where anyone can lend a hand as a waiter — an occasion for celebration, but also for growth and community.",
+      angDesc3: "Among the food stands you will also find a house specialty made with chicken, alongside plenty of fresh watermelon. And for the youngest guests, on the soccer field, besides the dining tables there are also bouncy castles to play safely.",
+      angPerk1: "Live music",
+      angPerk2: "Food stands with a chicken specialty",
+      angPerk3: "Open to the whole town",
+      angPerk4: "Volunteers welcome: anyone can be a waiter",
+      angPerk5: "Bouncy castles for kids on the soccer field",
+      galleryLabel: "From our Facebook posts",
+      galleryNote: "📌 Follow our Facebook page so you don't miss the next events!",
+      sectionBook: "Organize with us",
+      sectionTitleBook: "Organize a Party at the Oratory",
+      partyTitle: "Tell us about your party",
+      partySub: "Birthdays, group parties, special occasions: write us the details and we'll help you organize everything in the oratory space.",
+      perk1: "Outdoor and indoor spaces",
+      perk2: "Birthdays and kids' parties",
+      perk3: "Groups, classes and parishes",
+      perk4: "Personalized reply",
+      labelOrganizer: "Organizer's name",
+      placeholderOrganizer: "First and last name",
+      labelEmail: "Email",
+      placeholderEmail: "you@email.com",
+      labelEventType: "Type of event",
+      placeholderEventType: "E.g. birthday, kids' party, special occasion...",
+      labelPeople: "Number of participants",
+      placeholderPeople: "E.g. 20 people",
+      labelDate: "Preferred date",
+      placeholderDate: "E.g. Saturday afternoon, mid-June...",
+      labelPartyDetails: "Party details",
+      placeholderPartyDetails: "Tell us what you have in mind: spaces, times, any special needs...",
+      submitRequest: "Send request",
+      mapAddress: "<strong>Noi Ponzano</strong><br>Via Livello, 5<br>31050 Ponzano Veneto TV, Italia<br><br>Parish Oratory",
+      footerCopy: "© 2026 Noi Ponzano · Ponzano Veneto Oratory",
+      footerContact: "Contact",
+      footerPrivacy: "Privacy",
+      footerLegal: "Legal"
+    }
+  };
+
+  const originalText = {};
+  const originalPlaceholder = {};
+  const htmlKeys = new Set(["heroTitle", "mapAddress"]);
+
+  document.querySelectorAll('[data-i18n-key]').forEach(el => {
+    originalText[el.dataset.i18nKey] = el.innerHTML;
+  });
+
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    originalPlaceholder[el.dataset.i18nPlaceholder] = el.placeholder;
+  });
+
+  function translatePage(lang) {
+    const isEnglish = lang === "en";
+    document.documentElement.lang = isEnglish ? "en" : "it";
+
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.lang === lang);
+    });
+
+    document.querySelectorAll('[data-i18n-key]').forEach(el => {
+      const key = el.dataset.i18nKey;
+      if (!key) return;
+      if (isEnglish && translations.en[key] !== undefined) {
+        if (htmlKeys.has(key)) {
+          el.innerHTML = translations.en[key];
+        } else {
+          el.textContent = translations.en[key];
+        }
+      } else {
+        el.innerHTML = originalText[key];
+      }
+    });
+
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+      const key = el.dataset.i18nPlaceholder;
+      if (!key) return;
+      el.placeholder = isEnglish && translations.en[key] !== undefined ? translations.en[key] : originalPlaceholder[key];
+    });
+  }
+
+  document.querySelectorAll('.lang-btn').forEach(button => {
+    button.addEventListener('click', () => translatePage(button.dataset.lang));
+  });
+</script>
+
+
+</body>
+</html>
